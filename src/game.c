@@ -3232,7 +3232,9 @@ short EGS(short whatsect,int s_x,int s_y,int s_z,short s_pn,signed char s_s,sign
     if (show2dsector[SECT>>3]&(1<<(SECT&7))) show2dsprite[i>>3] |= (1<<(i&7));
     else show2dsprite[i>>3] &= ~(1<<(i&7));
 
+#if USE_POLYMOST && USE_OPENGL
     clearbufbyte(&spriteext[i], sizeof(spriteexttype), 0);
+#endif
 /*
     if(s->sectnum < 0)
     {

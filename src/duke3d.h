@@ -63,7 +63,11 @@ enum {
 #define BYTEVERSION_13	27
 #define BYTEVERSION_14	116
 #define BYTEVERSION_15	117
+#if USE_POLYMOST && USE_OPENGL
 #define BYTEVERSION_JF	132	// increase by 3, because atomic GRP adds 1, and Shareware adds 2
+#else
+#define BYTEVERSION_JF	135	// savegames without spriteext
+#endif
 
 #define BYTEVERSION (BYTEVERSION_JF+(PLUTOPAK?1:(VOLUMEONE<<1)))	// JBF 20040116: different data files give different versions
 

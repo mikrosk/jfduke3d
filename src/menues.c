@@ -280,7 +280,9 @@ int loadplayer(signed char spot)
     if (kdfread(&numsectors,2,1,fil) != 1) goto corrupt;
     if (kdfread(&sector[0],sizeof(sectortype),MAXSECTORS,fil) != MAXSECTORS) goto corrupt;
     if (kdfread(&sprite[0],sizeof(spritetype),MAXSPRITES,fil) != MAXSPRITES) goto corrupt;
+#if USE_POLYMOST && USE_OPENGL
     if (kdfread(&spriteext[0],sizeof(spriteexttype),MAXSPRITES,fil) != MAXSPRITES) goto corrupt;
+#endif
     if (kdfread(&headspritesect[0],2,MAXSECTORS+1,fil) != MAXSECTORS+1) goto corrupt;
     if (kdfread(&prevspritesect[0],2,MAXSPRITES,fil) != MAXSPRITES) goto corrupt;
     if (kdfread(&nextspritesect[0],2,MAXSPRITES,fil) != MAXSPRITES) goto corrupt;
@@ -550,7 +552,9 @@ int saveplayer(signed char spot)
     dfwrite(&numsectors,2,1,fil);
     dfwrite(&sector[0],sizeof(sectortype),MAXSECTORS,fil);
     dfwrite(&sprite[0],sizeof(spritetype),MAXSPRITES,fil);
+#if USE_POLYMOST && USE_OPENGL
     dfwrite(&spriteext[0],sizeof(spriteexttype),MAXSPRITES,fil);
+#endif
     dfwrite(&headspritesect[0],2,MAXSECTORS+1,fil);
     dfwrite(&prevspritesect[0],2,MAXSPRITES,fil);
     dfwrite(&nextspritesect[0],2,MAXSPRITES,fil);
