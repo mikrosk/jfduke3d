@@ -78,8 +78,13 @@ int32 JoystickAnalogueSaturate[MAXJOYAXES];
 
 int32 ScreenMode = 1;
 int32 ScreenDisplay = 0;
+#if defined(__MINT__)
+int32 ScreenWidth = 320;
+int32 ScreenHeight = 200;
+#else
 int32 ScreenWidth = 640;
 int32 ScreenHeight = 480;
+#endif
 int32 ScreenBPP = 8;
 int32 ForceSetup = 1;
 
@@ -197,7 +202,11 @@ void CONFIG_SetDefaults( void )
     NumVoices = 16;
     NumChannels = 2;
     NumBits = 16;
+#ifdef __MINT__
+    MixRate = 22050;
+#else
     MixRate = 44100;
+#endif
     SoundToggle = 1;
     MusicToggle = 1;
     VoiceToggle = 1;

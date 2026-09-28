@@ -7682,6 +7682,13 @@ int app_main(int argc, char const * const argv[])
     (void)configloaded;
 #endif
 
+#if defined(__MINT__)
+    // TOS can neither locate the executable nor provide a per-user profile
+    // directory, so game data is taken from "data" and then the current
+    // directory, and user files are written to the current directory.
+    addsearchpath(".");
+    addsearchpath("data");
+#else
 #if defined(DATADIR)
     {
         const char *datadir = DATADIR;
@@ -7709,6 +7716,7 @@ int app_main(int argc, char const * const argv[])
             free(supportdir);
         }
     }
+#endif
 
     checkcommandline(argc,argv);
 
@@ -7724,6 +7732,7 @@ int app_main(int argc, char const * const argv[])
         }
     }
 
+#if !defined(__MINT__)
     // creating a 'user_profiles_disabled' file in the current working
     // directory where the game was launched makes the installation
     // "portable" by writing into the working directory
@@ -7759,6 +7768,7 @@ int app_main(int argc, char const * const argv[])
             free(supportdir);
         }
     }
+#endif
 
     buildsetlogfile("duke3d.log");
 
