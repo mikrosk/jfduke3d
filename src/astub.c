@@ -1869,6 +1869,13 @@ int ExtInit(void)
 
 	wm_setapptitle("BUILD Editor for JFDuke3D");
 
+#if defined(__MINT__)
+    // TOS can neither locate the executable nor provide a per-user profile
+    // directory, so game data is taken from "data" and then the current
+    // directory, and user files are written to the current directory.
+    addsearchpath(".");
+    addsearchpath("data");
+#else
 #if defined(DATADIR)
     {
         const char *datadir = DATADIR;
@@ -1932,6 +1939,7 @@ int ExtInit(void)
             free(supportdir);
         }
     }
+#endif
 
     // JBF 20031220: Because it's annoying renaming GRP files whenever I want to test different game data
     if (getenv("DUKE3DGRP")) {
