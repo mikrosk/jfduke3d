@@ -65,10 +65,12 @@ static void tloadtile(short tilenume, char type)
 void cachespritenum(short i)
 {
     char maxc;
-    short j;
+    short j, first;
 
     if(ud.monsters_off && badguy(&sprite[i])) return;
 
+    // variants turn into their base actor in the CON, so their frames start there
+    first = PN;
     maxc = 1;
 
     switch(PN)
@@ -102,11 +104,13 @@ void cachespritenum(short i)
             break;
         case LIZTROOP:
         case LIZTROOPRUNNING:
+        case LIZTROOPSTAYPUT:
         case LIZTROOPSHOOT:
         case LIZTROOPJETPACK:
         case LIZTROOPONTOILET:
+        case LIZTROOPJUSTSIT:
         case LIZTROOPDUCKING:
-            for(j = LIZTROOP; j < (LIZTROOP+72); j++) {
+            for(j = LIZTROOP; j < (LIZTROOP+75); j++) {
                 tloadtile(j,1);
         }
             for(j=HEADJIB1;j<LEGJIB1+3;j++) {
@@ -116,43 +120,64 @@ void cachespritenum(short i)
             break;
         case WOODENHORSE:
             maxc = 5;
-            for(j = HORSEONSIDE; j < (HORSEONSIDE+4); j++) {
+            for(j = HORSEONSIDE; j < (HORSEONSIDE+5); j++) {
                 tloadtile(j,1);
         }
             break;
         case NEWBEAST:
         case NEWBEASTSTAYPUT:
-            maxc = 90;
+        case NEWBEASTHANG:
+        case NEWBEASTHANGDEAD:
+        case NEWBEASTJUMP:
+            first = NEWBEAST;
+            maxc = 95;
             break;
         case BOSS1:
+        case BOSS1STAYPUT:
+            first = BOSS1;
+            maxc = 56;
+            break;
         case BOSS2:
         case BOSS3:
-            maxc = 30;
+            maxc = 49;
+            break;
+        case BOSS4:
+        case BOSS4STAYPUT:
+            first = BOSS4;
+            maxc = 65;
             break;
         case OCTABRAIN:
         case OCTABRAINSTAYPUT:
+            first = OCTABRAIN;
+            maxc = 36;
+            break;
         case COMMANDER:
         case COMMANDERSTAYPUT:
-            maxc = 38;
+            first = COMMANDER-5;    // spinning frames
+            maxc = 43;
             break;
         case RECON:
             maxc = 13;
             break;
         case PIGCOP:
+        case PIGCOPSTAYPUT:
         case PIGCOPDIVE:
+            first = PIGCOP;
             maxc = 61;
             break;
         case SHARK:
-            maxc = 30;
+            maxc = 40;
             break;
         case LIZMAN:
+        case LIZMANSTAYPUT:
         case LIZMANSPITTING:
         case LIZMANFEEDING:
         case LIZMANJUMP:
             for(j=LIZMANHEAD1;j<LIZMANLEG1+3;j++) {
                 tloadtile(j,1);
         }
-            maxc = 80;
+            first = LIZMAN;
+            maxc = 78;
             break;
         case APLAYER:
             maxc = 0;
@@ -193,7 +218,7 @@ void cachespritenum(short i)
         case DEVISTATORSPRITE: for (j=DEVISTATOR; j<=DEVISTATOR+1; j++) tloadtile(j,1); break;
     }
 
-    for(j = PN; j < (PN+maxc); j++) {
+    for(j = first; j < (first+maxc); j++) {
         tloadtile(j,1);
     }
 }
