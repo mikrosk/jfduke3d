@@ -149,6 +149,10 @@ void cachespritenum(short i)
         case BOSS4STAYPUT:
             first = BOSS4;
             maxc = 65;
+            // its eggs hatch into NEWBEASTs
+            for(j = NEWBEAST; j < (NEWBEAST+95); j++) {
+                tloadtile(j,1);
+        }
             break;
         case OCTABRAIN:
         case OCTABRAINSTAYPUT:
@@ -162,6 +166,17 @@ void cachespritenum(short i)
             break;
         case RECON:
             maxc = 13;
+            // a PIGCOP jumps out when it's destroyed
+            for(j = PIGCOP; j < (PIGCOP+61); j++) {
+                tloadtile(j,1);
+        }
+            break;
+        case TANK:
+            maxc = 21;
+            // a PIGCOP may jump out when it's destroyed
+            for(j = PIGCOP; j < (PIGCOP+61); j++) {
+                tloadtile(j,1);
+        }
             break;
         case PIGCOP:
         case PIGCOPSTAYPUT:
@@ -185,12 +200,16 @@ void cachespritenum(short i)
             break;
         case APLAYER:
             maxc = 0;
-            if(ud.multimode > 1)
+            // other players, or yourself in a mirror
+            if(ud.multimode > 1 || mirrorcnt > 0)
             {
                 maxc = 5;
                 for(j = 1420;j < 1420+106; j++) {
                     tloadtile(j,1);
         }
+            }
+            if(ud.multimode > 1)
+            {
                 // swimming
                 for(j = 1780;j < 1780+20; j++) {
                     tloadtile(j,1);
