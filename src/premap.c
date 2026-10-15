@@ -187,6 +187,10 @@ void cachespritenum(short i)
                 for(j = 1420;j < 1420+106; j++) {
                     tloadtile(j,1);
         }
+                // swimming
+                for(j = 1780;j < 1780+20; j++) {
+                    tloadtile(j,1);
+        }
             }
             break;
         case ATOMICHEALTH:
