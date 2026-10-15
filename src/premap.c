@@ -69,7 +69,7 @@ void cachespritenum(short i)
 
     if(ud.monsters_off && badguy(&sprite[i])) return;
 
-    // variants turn into their base actor in the CON, so their frames start there
+    // variants show frames from their base actor's range, so caching starts there
     first = PN;
     maxc = 1;
 
@@ -110,7 +110,8 @@ void cachespritenum(short i)
         case LIZTROOPONTOILET:
         case LIZTROOPJUSTSIT:
         case LIZTROOPDUCKING:
-            for(j = LIZTROOP; j < (LIZTROOP+75); j++) {
+            // the last one is shown by troopers shrinking away to teleport
+            for(j = LIZTROOP; j < (LIZTROOP+76); j++) {
                 tloadtile(j,1);
         }
             for(j=HEADJIB1;j<LEGJIB1+3;j++) {
@@ -123,6 +124,9 @@ void cachespritenum(short i)
             for(j = HORSEONSIDE; j < (HORSEONSIDE+5); j++) {
                 tloadtile(j,1);
         }
+            break;
+        case HORSEONSIDE:
+            maxc = 5;
             break;
         case NEWBEAST:
         case NEWBEASTSTAYPUT:
@@ -239,7 +243,7 @@ void cachegoodsprites(void)
 
     for(i=STARTALPHANUM;i<ENDALPHANUM+1;i++) tloadtile(i,1);
     for(i=BIGALPHANUM; i<BIGALPHANUM+82; i++) tloadtile(i,1);
-    for(i=MINIFONT;i<MINIFONT+64;i++) tloadtile(i,1);
+    for(i=MINIFONT;i<MINIFONT+94;i++) tloadtile(i,1);
 
     tloadtile(FOOTPRINTS,1);
     for(i=FOOTPRINTS2;i<FOOTPRINTS4+1;i++) tloadtile(i,1);
