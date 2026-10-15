@@ -235,9 +235,10 @@ void cachegoodsprites(void)
 
     for(i=STARTALPHANUM;i<ENDALPHANUM+1;i++) tloadtile(i,1);
     for(i=BIGALPHANUM; i<BIGALPHANUM+82; i++) tloadtile(i,1);
-    for(i=MINIFONT;i<MINIFONT+63;i++) tloadtile(i,1);
+    for(i=MINIFONT;i<MINIFONT+64;i++) tloadtile(i,1);
 
-    for(i=FOOTPRINTS;i<FOOTPRINTS+3;i++) tloadtile(i,1);
+    tloadtile(FOOTPRINTS,1);
+    for(i=FOOTPRINTS2;i<FOOTPRINTS4+1;i++) tloadtile(i,1);
 
     for( i = BURNING; i < BURNING+14; i++) tloadtile(i,1);
     for( i = BURNING2; i < BURNING2+14; i++) tloadtile(i,1);
@@ -253,6 +254,7 @@ void cachegoodsprites(void)
     for( i = SMALLSMOKE; i < (SMALLSMOKE+4); i++) tloadtile(i,1);
 
     for( i = JIBS1; i < (JIBS5+5); i++) tloadtile(i,1);
+    for( i = JIBS6; i < (JIBS6+8); i++) tloadtile(i,1);
     for( i = SCRAP1; i < (SCRAP1+19); i++) tloadtile(i,1);
 
     for (i=RPG; i<RPG+7; i++) tloadtile(i,1);
